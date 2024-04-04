@@ -1,3 +1,5 @@
+venv/
+raw_data/Standard-QKP/*.txt
 collections/Standard-QKP/*.txt
 collections/New-QKP/*.txt
 collections/Dispersion-QKP/*.txt
