@@ -31,13 +31,13 @@ First line: n m type
 lines 2-m+1: i j u_ij
 * i: first node of edge 
 * j: second node of edge 
-* u_ij: weights of edge
+* u_ij: weight of edge [i, j]
 
-line m+2: q_j
+line m+2: q_0, q_1, ...
 * q_j: weight of node j
 
-line m+3: B_1 B_2 ...
-* B_1, B_2, ...: budgets
+line m+3: B_0 B_1 ...
+* B_0, B_1, ...: budgets
 
 Here is an example of a file that describes a graph with 5 nodes and 15 edges. 
 The last line lists two budgets (25 and 75). Note that this graph contains 
