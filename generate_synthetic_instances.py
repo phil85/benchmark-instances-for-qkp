@@ -280,4 +280,4 @@ for n_nodes in n_nodes_list:
                 budgets.append(int(budget_fraction * np.sum(weights)))
 
             write_file(nodes, edges, weights, budgets, 'New-QKP',
-                       'qkp_new_{:d}_{:d}_{:d}'.format(n_nodes, density, seed), weight_type='float')
+                       'qkp_new_{:d}_{:d}_{:d}.txt'.format(n_nodes, density, seed), weight_type='float')
