@@ -21,7 +21,7 @@ The folder collections contains five collections of instances.
 
 # Description of format
 
-Each txt file contain the information of one graph and one or multiple budgets:
+Each txt file contains the information of one graph and one or multiple budgets:
 
 First line: n m type
 * n: number of nodes
@@ -39,7 +39,9 @@ line m+2: q_j
 line m+3: B_1 B_2 ...
 * B_1, B_2, ...: budgets
 
-Here is an example of a file that describes a graph with 5 nodes, 15 edges. The last line lists two budgets (25 and 75).
+Here is an example of a file that describes a graph with 5 nodes and 15 edges. 
+The last line lists two budgets (25 and 75). Note that this graph contains 
+self-loops (singleton utilities u_ii > 0).    
 
 ```
 5 15 int
