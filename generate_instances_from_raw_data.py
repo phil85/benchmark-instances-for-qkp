@@ -64,10 +64,9 @@ def generate_utility_matrix_from_xlsx_file_of_team_formation_dataset(file_name):
 
     return utility_matrix
 
-
 # %% Define budget fractions
 
-budget_fractions = [0.025, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95]
+budget_fractions = [0.025, 0.05, 0.1, 0.25, 0.5, 0.75]
 
 # %% Download standard QKP instances
 
@@ -148,6 +147,122 @@ for n_nodes in n_nodes_list:
             f.write('{:d}\n'.format(budget))
             f.close()
 
+# %% Prepare quadratic knapsack problem instances (from group II)
+
+# Read raw_data
+instances_folder = 'QKPGroupII'
+n_nodes_list = [1000, 2000]
+densities = {1000: [25, 50, 75, 100],
+             2000: [25, 50, 75, 100]}
+instances = np.arange(1, 11)
+
+for n_nodes in n_nodes_list:
+    for density in densities[n_nodes]:
+        for instance in instances:
+
+            # Get file name
+            file_name = '{:d}_{:d}_{:d}'.format(n_nodes, density, instance)
+
+            # Read file
+            f = open('raw_data/' + instances_folder + '/' + file_name + '.dat', 'r')
+            lines = f.readlines()
+            f.close()
+
+            # Get number of nodes and edges
+            n_nodes = int(lines[0])
+
+            # Get linear utilities
+            edges = []
+            linear_utilities = [int(v) for v in lines[1].strip('\n').split(' ') if v != '']
+            for i in range(n_nodes):
+                edges += [(i, i, linear_utilities[i])]
+
+            # Get quadratic utilities
+            for i in range(n_nodes):
+                quadratic_utilities = [int(v) for v in lines[2 + i].strip('\n').split(' ') if v != '']
+                for j in range(i + 1, n_nodes):
+                    edges += [(i, j, quadratic_utilities[j - (i + 1)])]
+
+            # Remove edges with utility of zero
+            edges = [edge for edge in edges if edge[2] != 0]
+
+            # Write file
+            f = open('collections/' + instances_folder + '/' + file_name + '.txt', 'w')
+            f.write('{:d} {:d} {:s}\n'.format(n_nodes, len(edges), 'int'))
+            for ind_i, ind_j, val in edges:
+                f.write('{:d} {:d} {:.6f}\n'.format(ind_i, ind_j, val))
+
+            # Get weights
+            budget = int(lines[3 + n_nodes].strip('\n'))
+            weights = [int(v) for v in lines[4 + n_nodes].strip('\n').split(' ') if v != '']
+
+            # Write weights to file
+            for weight in weights:
+                f.write('{:d} '.format(weight))
+            f.write('\n')
+
+            # Write budget to file
+            f.write('{:d}\n'.format(budget))
+            f.close()
+
+# %% Prepare quadratic knapsack problem instances (from group III)
+
+# Read raw_data
+instances_folder = 'QKPGroupIII'
+n_nodes_list = [5000, 6000]
+densities = {5000: [25, 50, 75, 100],
+             6000: [25, 50, 75, 100]}
+instances = np.arange(1, 6)
+
+for n_nodes in n_nodes_list:
+    for density in densities[n_nodes]:
+        for instance in instances:
+
+            # Get file name
+            file_name = '{:d}_{:d}_{:d}'.format(n_nodes, density, instance)
+
+            # Read file
+            f = open('raw_data/' + instances_folder + '/' + file_name + '.txt', 'r')
+            lines = f.readlines()
+            f.close()
+
+            # Get number of nodes and edges
+            n_nodes = int(lines[1])
+
+            # Get linear utilities
+            edges = []
+            linear_utilities = [int(v) for v in lines[3].strip('\n').split(' ') if v != '']
+            for i in range(n_nodes):
+                edges += [(i, i, linear_utilities[i])]
+
+            # Get quadratic utilities
+            for i in range(n_nodes):
+                quadratic_utilities = [int(v) for v in lines[4 + i].strip('\n').split(' ') if v != '']
+                for j in range(i + 1, n_nodes):
+                    edges += [(i, j, quadratic_utilities[j - (i + 1)])]
+
+            # Remove edges with utility of zero
+            edges = [edge for edge in edges if edge[2] != 0]
+
+            # Write file
+            f = open('collections/' + instances_folder + '/' + file_name + '.txt', 'w')
+            f.write('{:d} {:d} {:s}\n'.format(n_nodes, len(edges), 'int'))
+            for ind_i, ind_j, val in edges:
+                f.write('{:d} {:d} {:.6f}\n'.format(ind_i, ind_j, val))
+
+            # Get weights
+            budget = int(lines[6 + n_nodes].strip('\n'))
+            weights = [int(v) for v in lines[7 + n_nodes].strip('\n').split(' ') if v != '']
+
+            # Write weights to file
+            for weight in weights:
+                f.write('{:d} '.format(weight))
+            f.write('\n')
+
+            # Write budget to file
+            f.write('{:d}\n'.format(budget))
+            f.close()
+
 # %% Generate team formation QKP instances from real data sets
 
 max_weight = 10
@@ -169,6 +284,9 @@ for file_name in file_names:
         for j in range(i + 1, n_nodes):
             if utility_matrix[i, j] > 0:
                 f.write('{:d} {:d} {:.6f}\n'.format(i, j, utility_matrix[i, j]))
+
+    # Set random seed
+    np.random.seed(24)
 
     # Generate weights
     weights = np.random.randint(1, max_weight + 1, n_nodes)
@@ -192,6 +310,9 @@ max_weight = 10
 folder_source = 'raw_data/synthetic team formation data sets/'
 file_names = os.listdir(folder_source)
 
+# Sort file_names
+file_names.sort()
+
 for i, file_name in enumerate(file_names):
 
     # Read file
@@ -211,10 +332,13 @@ for i, file_name in enumerate(file_names):
             edges.append((int(ind_i), int(ind_j), float(val)))
 
     # Write file
-    f = open('collections/TeamFormation-QKP-1/Synthetic_TF_{:d}_n7000.txt'.format(i+1), 'w')
+    f = open('collections/TeamFormation-QKP-1/Synthetic_TF_{:d}_n7000.txt'.format(i + 1), 'w')
     f.write('{:d} {:d} {:s}\n'.format(n_nodes, len(edges), 'float'))
     for ind_i, ind_j, val in edges:
         f.write('{:d} {:d} {:.6f}\n'.format(ind_i, ind_j, val))
+
+    # Set random seed
+    np.random.seed(24)
 
     # Generate weights
     weights = np.random.randint(1, max_weight + 1, n_nodes)
