@@ -19,7 +19,7 @@ The folder collections contains seven collections of instances.
 * Large-QKP: new instances generated with similar procedure as the standard qkp instances
 * Dispersion-QKP: instances adapted from dispersion problem instances
 * TeamFormation-QKP-1: instances adapted from team formation problem instances with low density
-* TeamFormation-QKP-2: instances adapted from team formation problem instances with high density
+* TeamFormation-QKP-2: instances adapted from team formation problem instances with moderate density
 
 # Description of format
 
@@ -65,5 +65,23 @@ self-loops (singleton utilities u_ii > 0).
 40 5 4 44 8 
 25 75 
 ```
+## Reference
 
+Please cite the following paper if you use this repository.
+
+**Hochbaum, D. S., Baumann, P., Goldschmidt O., Zhang Y.** (2024): A Fast and Effective Breakpoints Algorithm for the Quadratic Knapsack Problem. under review.
+
+Bibtex:
+```
+@article{hochbaum2024fast,
+	author={Hochbaum, Dorit S., Baumann, Philipp, Goldschmidt Olivier and Zhang Yiqing},
+	title = {A Fast and Effective Breakpoints Algorithm for the Quadratic Knapsack Problem},
+	year={2024},
+	journal = {under review},
+}
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
