@@ -11,10 +11,12 @@ This repository contains the code to generate benchmark instances for the quadra
 
 # Overview of instances
 
-The folder collections contains five collections of instances.
+The folder collections contains seven collections of instances.
 
 * Standard-QKP: well-known standard qkp instances from https://cedric.cnam.fr/~soutif/QKP/QKP.html
-* New-QKP: new instances generated with the same procedure as the standard qkp instances
+* QKPGroupII: well-known larger qkp instances from https://leria-info.univ-angers.fr/~jinkao.hao/QKP.html
+* QKPGroupIII: well-known larger qkp instances from https://leria-info.univ-angers.fr/~jinkao.hao/QKP.html
+* Large-QKP: new instances generated with similar procedure as the standard qkp instances
 * Dispersion-QKP: instances adapted from dispersion problem instances
 * TeamFormation-QKP-1: instances adapted from team formation problem instances with low density
 * TeamFormation-QKP-2: instances adapted from team formation problem instances with high density
