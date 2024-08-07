@@ -1,7 +1,9 @@
 import os
+import zipfile
 import pandas as pd
 import numpy as np
 import urllib.request
+import patoolib
 
 
 def generate_utility_matrix_from_xlsx_file_of_team_formation_dataset(file_name):
@@ -87,6 +89,63 @@ for n_nodes in n_nodes_list:
 
             # Download file
             urllib.request.urlretrieve(url, 'raw_data/Standard-QKP/' + file_name)
+
+# %% Download and unzip QKPGroupII instances
+
+# Download zip file from url
+folder_name = 'QKPGroupII'
+url = 'https://leria-info.univ-angers.fr/%7Ejinkao.hao/QKPDATA/QKPGroupII.zip'
+file_name = url.split('/')[-1]
+urllib.request.urlretrieve(url, 'raw_data/' + folder_name + '/' + file_name)
+
+# Unzip file
+with zipfile.ZipFile('raw_data/' + folder_name + '/' + file_name, 'r') as zip_ref:
+    zip_ref.extractall('raw_data')
+
+# Unzip rar file
+for i in [25, 50, 75, 100]:
+    patoolib.extract_archive('raw_data/' + folder_name + '/1000_{:d}.rar'.format(i), outdir='raw_data/' + folder_name)
+
+    # Copy files from folder to parent folder
+    os.system('cp raw_data/' + folder_name + '/1000_{:d}/* raw_data/'.format(i) + folder_name)
+
+    # Remove folder
+    os.system('rm -r raw_data/' + folder_name + '/1000_{:d}'.format(i))
+
+    # Delete rar file
+    os.system('rm raw_data/' + folder_name + '/1000_{:d}.rar'.format(i))
+
+for i in ['25', '50(1)', '50(2)', '75(1)', '75(2)', '100(1)', '100(2)']:
+
+    patoolib.extract_archive('raw_data/' + folder_name + '/2000_{:s}.rar'.format(i), outdir='raw_data/' + folder_name)
+
+    # Copy files from folder to parent folder
+    os.system('cp raw_data/' + folder_name + '/2000_{:s}/* raw_data/'.format(i) + folder_name)
+
+    # Remove folder
+    os.system('rm -r raw_data/' + folder_name + '/2000_{:s}'.format(i))
+
+    # Delete rar file
+    os.system('rm raw_data/' + folder_name + '/2000_{:s}.rar'.format(i))
+
+# Delete format.pdf and zip file
+os.system('rm raw_data/' + folder_name + '/format.pdf')
+os.system('rm raw_data/' + folder_name + '/QKPGroupII.zip')
+
+# %% Download and unzip QKPGroupIII instances
+
+# Download zip file from url
+folder_name = 'QKPGroupIII'
+url = 'https://leria-info.univ-angers.fr/%7Ejinkao.hao/QKPDATA/QKPGroupIII.zip'
+file_name = url.split('/')[-1]
+urllib.request.urlretrieve(url, 'raw_data/' + folder_name + '/' + file_name)
+
+# Unzip file
+with zipfile.ZipFile('raw_data/' + folder_name + '/' + file_name, 'r') as zip_ref:
+    zip_ref.extractall('raw_data')
+
+# Delete zip file
+os.system('rm raw_data/' + folder_name + '/QKPGroupIII.zip')
 
 # %% Write standard QKP instances in different format
 
