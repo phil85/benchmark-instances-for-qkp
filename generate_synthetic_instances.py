@@ -2,7 +2,7 @@ import numpy as np
 
 # %% Define budget fractions
 
-budget_fractions = [0.025, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95]
+budget_fractions = [0.025, 0.05, 0.1, 0.25, 0.5, 0.75]
 
 # %%
 
@@ -101,7 +101,7 @@ def generate_weights(n_nodes):
 # %% Generate instances of Dispersion-QKP collection
 
 # Number of nodes
-n_nodes_values = [100, 200, 300, 500, 1000, 2000]
+n_nodes_values = [300, 500, 1000, 2000]
 instance_types = ['geo', 'wgeo', 'expo', 'ran']
 sparsification_fractions = [0.05, 0.1, 0.25, 0.5, 0.75, 1]
 
