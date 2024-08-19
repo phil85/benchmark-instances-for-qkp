@@ -238,7 +238,7 @@ for n_participants in n_participants_values:
 # %% Generate instances of New-QKP collection
 
 # Read raw_data
-instances_folder = 'New-QKP'
+instances_folder = 'Large-QKP'
 n_nodes_list = [500, 1000, 2000, 5000, 10000]
 densities = {500: [5, 10, 15, 20, 25, 50, 75, 100],
              1000: [5, 10, 15, 20, 25, 50],
@@ -279,5 +279,5 @@ for n_nodes in n_nodes_list:
             for budget_fraction in budget_fractions:
                 budgets.append(int(budget_fraction * np.sum(weights)))
 
-            write_file(nodes, edges, weights, budgets, 'New-QKP',
-                       'qkp_new_{:d}_{:d}_{:d}.txt'.format(n_nodes, density, seed), weight_type='float')
+            write_file(nodes, edges, weights, budgets, 'Large-QKP',
+                       'large_qkp_{:d}_{:d}_{:d}.txt'.format(n_nodes, density, seed), weight_type='float')

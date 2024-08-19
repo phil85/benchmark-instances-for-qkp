@@ -3,7 +3,7 @@ raw_data/Standard-QKP/*.txt
 raw_data/QKPGroupII/*.dat
 raw_data/QKPGroupIII/*.txt
 collections/Standard-QKP/*.txt
-collections/New-QKP/*.txt
+collections/Large-QKP/*.txt
 collections/QKPGroupII/*.txt
 collections/QKPGroupIII/*.txt
 collections/Dispersion-QKP/*.txt
