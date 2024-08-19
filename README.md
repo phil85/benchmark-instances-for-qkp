@@ -6,8 +6,9 @@ This repository contains the code to generate benchmark instances for the quadra
 
 1) Clone the repository
 2) Create a virtual environment and install the required packages (see requirements.txt)
-3) Run the script `generate_instances_from_raw_data.py` 
-4) Run the script `generate_synthetic_instances.py`
+3) On Linux OS: run "sudo apt install unrar" in terminal to install the unrar package 
+4) Run the script `generate_instances_from_raw_data.py` 
+5) Run the script `generate_synthetic_instances.py`
 
 # Overview of instances
 

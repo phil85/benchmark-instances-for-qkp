@@ -120,13 +120,13 @@ for i in ['25', '50(1)', '50(2)', '75(1)', '75(2)', '100(1)', '100(2)']:
     patoolib.extract_archive('raw_data/' + folder_name + '/2000_{:s}.rar'.format(i), outdir='raw_data/' + folder_name)
 
     # Copy files from folder to parent folder
-    os.system('cp raw_data/' + folder_name + '/2000_{:s}/* raw_data/'.format(i) + folder_name)
+    os.system('cp "raw_data/' + folder_name + '/2000_{:s}/"* raw_data/'.format(i) + folder_name)
 
     # Remove folder
-    os.system('rm -r raw_data/' + folder_name + '/2000_{:s}'.format(i))
+    os.system('rm -r "raw_data/' + folder_name + '/2000_{:s}"'.format(i))
 
     # Delete rar file
-    os.system('rm raw_data/' + folder_name + '/2000_{:s}.rar'.format(i))
+    os.system('rm "raw_data/' + folder_name + '/2000_{:s}.rar"'.format(i))
 
 # Delete format.pdf and zip file
 os.system('rm raw_data/' + folder_name + '/format.pdf')
